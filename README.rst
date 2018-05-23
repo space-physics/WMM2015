@@ -21,7 +21,6 @@ WMM2015 World Magnetic Model...in simple, object-oriented Python.
 
 .. image:: tests/incldecl.png
 
-.. image:: tests/vectors.png
 
 Install
 =======
