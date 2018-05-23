@@ -3,8 +3,8 @@ install_requires = ['xarray','numpy','sciencedates']
 tests_require=['pytest','nose','coveralls']
 
 # %%
-from setuptools import find_packages
-from numpy.distutils.core import setup,Extension
+import subprocess
+from setuptools import find_packages,setup
 #%% install
 setup(name='pyWMM2015',
       packages=find_packages(),
@@ -14,8 +14,6 @@ setup(name='pyWMM2015',
       description='WMM2015 geomagnetic model with simple object-oriented Python interface',
       long_description=open('README.rst').read(),
 	  install_requires=install_requires,
-      ext_modules=[Extension(name='libwmm15',
-                           sources=['src/wmm_point_sub.c'])],
       classifiers=[
           'Development Status :: 4 - Beta',
           'Environment :: Console',
@@ -31,3 +29,6 @@ setup(name='pyWMM2015',
       python_requires='>=3.5',
       tests_require=tests_require,
 	  )
+
+subprocess.check_call(['cmake','../src'],cwd='bin')
+subprocess.check_call(['make'],cwd='bin')

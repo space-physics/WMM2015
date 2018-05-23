@@ -84,7 +84,7 @@ int wmmsub(double geolatitude, double geolongitude, double HeightAboveEllipsoid,
     MAG_WMMErrorCalc(GeoMagneticElements.H, &Errors);
     
     // Hushed for Python use
-     MAG_PrintUserDataWithUncertainty(GeoMagneticElements, Errors, CoordGeodetic, UserDate, TimedMagneticModel, &Geoid); /* Print the results */
+     //MAG_PrintUserDataWithUncertainty(GeoMagneticElements, Errors, CoordGeodetic, UserDate, TimedMagneticModel, &Geoid); /* Print the results */
 
 
     MAG_FreeMagneticModelMemory(TimedMagneticModel);

@@ -18,6 +18,7 @@ def wmm(glats:float, glons:float, alt_km:float, yeardec:float) -> xarray.Dataset
     north = np.empty(glats.size)
     east = np.empty(glats.size)
     down = np.empty(glats.size)
+    total = np.empty(glats.size)
     decl = np.empty(glats.size)
     incl = np.empty(glats.size)
 
@@ -26,7 +27,7 @@ def wmm(glats:float, glons:float, alt_km:float, yeardec:float) -> xarray.Dataset
         x=ct.c_double()
         y=ct.c_double()
         z=ct.c_double()
-        total = ct.c_double()
+        T = ct.c_double()
         D = ct.c_double()
         I = ct.c_double()
 
@@ -35,19 +36,21 @@ def wmm(glats:float, glons:float, alt_km:float, yeardec:float) -> xarray.Dataset
                               ct.c_double(alt_km),
                               ct.c_double(yeardec),
                               ct.byref(x), ct.byref(y), ct.byref(z),
-                              ct.byref(total), ct.byref(D), ct.byref(I))
+                              ct.byref(T), ct.byref(D), ct.byref(I))
 
         assert ret==0
 
         north[i] = x.value
         east[i] = y.value
         down[i] = z.value
+        total[i] = T.value
         decl[i] = D.value
         incl[i] = I.value
 
     mag['north'] = (('glat','glon'),north.reshape(glats.shape))
     mag['east']  = (('glat','glon'),east.reshape(glats.shape))
     mag['down']  = (('glat','glon'),down.reshape(glats.shape))
+    mag['total']  = (('glat','glon'),total.reshape(glats.shape))
     mag['incl']  = (('glat','glon'),incl.reshape(glats.shape))
     mag['decl']  = (('glat','glon'),decl.reshape(glats.shape))
 

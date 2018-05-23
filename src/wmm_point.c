@@ -38,7 +38,7 @@ int main()
     MAGtype_GeoMagneticElements GeoMagneticElements, Errors;
     MAGtype_Geoid Geoid;
     char ans[20], b;
-    char filename[] = "WMM.COF";
+    char filename[] = "../WMM.COF";
     char VersionDate_Large[] = "$Date: 2014-11-21 10:40:43 -0700 (Fri, 21 Nov 2014) $";
     char VersionDate[12];
     int NumTerms, Flag = 1, nMax = 0;
