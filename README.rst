@@ -1,6 +1,6 @@
-.. image:: https://travis-ci.org/scivision/pyWMM2015.svg?branch=master
-    :target: https://travis-ci.org/scivision/pyWMM2015
-
+.. image:: https://travis-ci.com/scivision/pyWMM2015.svg?branch=master
+    :target: https://travis-ci.com/scivision/pyWMM2015
+    
 .. image:: https://coveralls.io/repos/github/scivision/pyWMM2015/badge.svg?branch=master
     :target: https://coveralls.io/github/scivision/pyWMM2015?branch=master
 
