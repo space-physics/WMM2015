@@ -8,7 +8,8 @@
 
 # WMM2015                                                          
 
- WMM2015 World Magnetic Model\...in simple, object-oriented Python. 
+ WMM2015 World Magnetic Model...in simple, object-oriented Python.
+ Tested on Linux, Mac and Windows.
  
  ![image](tests/incldecl.png) 
 
