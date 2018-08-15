@@ -2,12 +2,18 @@ import numpy as np
 from pathlib import Path
 import xarray
 import ctypes as ct
-import os
+import sys
 
 R = Path(__file__).parents[1] / 'bin'
 dllfn = R/'libwmm15'
-if os.name == 'posix':
+if sys.platform == 'win32':
+    pass  # no extension needed on win32
+elif sys.platform == 'linux':
     dllfn = dllfn.with_suffix('.so')
+elif sys.platform == 'darwin':
+    dllfn = dllfn.with_suffix('.dylib')
+elif sys.platform == 'cygwin':
+    dllfn = dllfn.with_suffix('.dll')
 
 libwmm = ct.cdll.LoadLibrary(str(dllfn))  # NOTE: must be str() for Windows, even with py37
 
