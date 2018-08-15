@@ -3,7 +3,7 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/a1xae6d5b5ek65p7?svg=true)](https://ci.appveyor.com/project/scivision/wmm2015)
 [![Python versions (PyPI)](https://img.shields.io/pypi/pyversions/pyWMM2015.svg)](https://pypi.python.org/pypi/pyWMM2015)
 [![Distribution format (PyPI)](https://img.shields.io/pypi/format/pyWMM2015.svg)](https://pypi.python.org/pypi/pyWMM2015)
-[![Downloads](http://pepy.tech/badge/pywmm2015)](http://pepy.tech/project/wmm2015)
+[![Downloads](http://pepy.tech/badge/wmm2015)](http://pepy.tech/project/wmm2015)
 
 
 # WMM2015                                                          
