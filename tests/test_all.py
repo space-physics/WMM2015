@@ -1,21 +1,24 @@
 #!/usr/bin/env python
 import datetime
-import numpy as np
-#
-import pywmm2015 as wmm
+import pytest
+from pytest import approx
+from sciencedates import datetime2yeardec
+import wmm2015 as wmm
+
 
 def test_wmm2015():
-    dt = datetime.datetime(2012,7,12,12)
+    dt = datetime.datetime(2012, 7, 12, 12)
 
-    mag = wmm.wmm(65,85,0,2012.5)
+    mag = wmm.wmm(65, 85, 0, datetime2yeardec(dt))
 
-    np.testing.assert_allclose(mag.north,9216.865031)
-    np.testing.assert_allclose(mag.east, 2516.406981)
-    np.testing.assert_allclose(mag.down, 59708.029303)
-    np.testing.assert_allclose(mag.total, 60467.608422)
+    assert mag.north.item() == approx(9215.692665)
+    assert mag.east.item() == approx(2516.0058789)
+    assert mag.down.item() == approx(59708.529371)
+    assert mag.total.item() == approx(60467.906831)
 
-    np.testing.assert_allclose(mag.incl, 80.908858)
-    np.testing.assert_allclose(mag.decl, 15.270835)
+    assert mag.incl.item() == approx(80.910090)
+    assert mag.decl.item() == approx(15.27036)
+
 
 if __name__ == '__main__':
-    np.testing.run_module_suite()
+    pytest.main(['-x', __file__])
