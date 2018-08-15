@@ -9,7 +9,7 @@ dllfn = R/'libwmm15'
 if os.name == 'posix':
     dllfn = dllfn.with_suffix('.so')
 
-libwmm = ct.cdll.LoadLibrary(dllfn)  # type: ignore
+libwmm = ct.cdll.LoadLibrary(str(dllfn))  # NOTE: must be str() for Windows, even with py37
 
 
 def wmm(glats: np.ndarray, glons: np.ndarray, alt_km: float, yeardec: float) -> xarray.Dataset:
