@@ -3,21 +3,33 @@ from pathlib import Path
 import xarray
 import ctypes as ct
 import sys
+import shutil
 
-R = Path(__file__).parents[1] / "build"
-dllfn = R / "libwmm15"
-if sys.platform == "win32":
+from .build import build
+
+BDIR = Path(__file__).parents[1] / "build"
+SDIR = Path(__file__).parents[1]
+
+dllfn = BDIR / "libwmm15"
+if sys.platform in ("win32", "cygwin"):
     dllfn = dllfn.with_suffix(".dll")
 elif sys.platform == "linux":
     dllfn = dllfn.with_suffix(".so")
 elif sys.platform == "darwin":
     dllfn = dllfn.with_suffix(".dylib")
-elif sys.platform == "cygwin":
-    dllfn = dllfn.with_suffix(".dll")
-
-libwmm = ct.cdll.LoadLibrary(
-    str(dllfn)
-)  # NOTE: must be str() for Windows, even with py37
+# NOTE: must be str() for Windows, even with py37
+try:
+    libwmm = ct.cdll.LoadLibrary(str(dllfn))
+except OSError:
+    cmake = shutil.which("cmake")
+    meson = shutil.which("meson")
+    if meson:
+        build("meson", SDIR, BDIR)
+    elif cmake:
+        build("cmake", SDIR, BDIR)
+    else:
+        raise RuntimeError("Need Meson or CMake to build WMM2015")
+    libwmm = ct.cdll.LoadLibrary(str(dllfn))
 
 
 def wmm(

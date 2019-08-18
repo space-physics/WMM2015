@@ -12,13 +12,13 @@
 
 /*---------------------------------------------------------------------------*/
 
-/* 
+/*
 WMM Point Calculation Program.
 
 The Geomagnetism Library is used to make a command prompt program. The program prompts
 the user to enter a location, performs the computations and prints the results to the
 standard output. The program expects the files GeomagnetismLibrary.c, GeomagnetismHeader.h,
-WMM.COF and EGM9615.h to be in the same directory. 
+WMM.COF and EGM9615.h to be in the same directory.
 
 Manoj.C.Nair@Noaa.Gov
 April 21, 2011
@@ -48,8 +48,7 @@ int main()
     strncpy(VersionDate, VersionDate_Large + 39, 11);
     VersionDate[11] = '\0';
     if(!MAG_robustReadMagModels(filename, &MagneticModels, epochs)) {
-        printf("\n WMM.COF not found.  Press enter to exit... \n ");
-        fgets(ans, 20, stdin);
+        printf("\n WMM.COF not found.\n ");
         return 1;
     }
     if(nMax < MagneticModels[0]->nMax) nMax = MagneticModels[0]->nMax;

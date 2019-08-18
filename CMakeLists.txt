@@ -1,10 +1,15 @@
 cmake_minimum_required(VERSION 3.3)
+if(NOT CMAKE_BUILD_TYPE)
+  set(CMAKE_BUILD_TYPE Release CACHE STRING "Debug or Release" FORCE)
+endif()
 project(wmm15 C)
 enable_testing()
 
 add_library(geo src/GeomagnetismLibrary.c)
 set_target_properties(geo PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
+if(NOT MSVC)
 target_link_libraries(geo m)
+endif()
 
 add_library(wmm15 SHARED src/wmm_point_sub.c)
 target_link_libraries(wmm15 PRIVATE geo)

@@ -1,5 +1,5 @@
 project('wmm15', 'c',
-  default_options : ['default_library=static', 'buildtype=release'])
+  default_options : ['default_library=static', 'buildtype=release', 'warning_level=0'])
 
 cc = meson.get_compiler('c')
 if cc.get_id() != 'msvc'
