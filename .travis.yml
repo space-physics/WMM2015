@@ -1,44 +1,17 @@
-language: generic
+language: python
 group: travis_latest
+dist: xenial
 
 git:
-  depth: 3
+  depth: 25
   quiet: true
-
-env:
-- TRAVIS_PYTHON_VERSION=3.6
-- TRAVIS_PYTHON_VERSION=3.7
 
 os:
 - linux
-- osx
 
-before_install:
-- if [[ $TRAVIS_OS_NAME == osx ]]; then
-  wget https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -O miniconda.sh;
-  else
-  wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
-  fi
-
-- bash miniconda.sh -b -p $HOME/miniconda
-- export PATH=$HOME/miniconda/bin:$PATH
-- hash -r
-
-- conda config --set always_yes yes --set changeps1 no
-- conda update -q conda
-- conda create -n test python=$TRAVIS_PYTHON_VERSION
-- source activate test
-
-install: pip install -e .[tests]
+install: pip install -e .[tests,lint]
 
 script:
-- pytest -rsv
+- pytest -r a -v
 - flake8
-- mypy . --ignore-missing-imports
-
-after_success:
-- if [[ $TRAVIS_PYTHON_VERSION == 3.6* ]]; then
-  pytest --cov --cov-config=setup.cfg;
-  coveralls;
-  fi
-
+- mypy .

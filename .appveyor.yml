@@ -2,13 +2,13 @@ image:
 - Visual Studio 2017
 - Ubuntu
 
-stack: python 3
+stack: python 3.7
 
 environment:
   PY_DIR: C:\Python36-x64
   MINGW_DIR: C:\mingw-w64\x86_64-7.2.0-posix-seh-rt_v5-rev1\mingw64\bin
 
-clone_depth: 3
+clone_depth: 25
 
 build: off
 
@@ -18,5 +18,5 @@ init:
 
 install: pip install -e .[tests]
 
-test_script: pytest -rsv
+test_script: pytest -r a -v
 

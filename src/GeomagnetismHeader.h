@@ -38,14 +38,14 @@
  *http://www.copsegrove.com/Pages/MWDGeomagneticModels.aspx
  */
 #define INCL_ERROR_BASE (0.20)
-#define DECL_ERROR_OFFSET_BASE (0.36)  
+#define DECL_ERROR_OFFSET_BASE (0.36)
 #define F_ERROR_BASE (130)
 #define DECL_ERROR_SLOPE_BASE (5000)
 #define WMM_ERROR_MULTIPLIER 1.21
 #define IGRF_ERROR_MULTIPLIER 1.21
 
 /*These error values are the NGDC error model
- * 
+ *
  */
 #define WMM_UNCERTAINTY_F 152
 #define WMM_UNCERTAINTY_H 133
@@ -100,8 +100,8 @@ typedef struct {
     int nMax; /* Maximum degree of spherical harmonic model */
     int nMaxSecVar; /* Maximum degree of spherical harmonic secular model */
     int SecularVariationUsed; /* Whether or not the magnetic secular variation vector will be needed by program*/
-    double CoefficientFileEndDate; 
-    
+    double CoefficientFileEndDate;
+
 } MAGtype_MagneticModel;
 
 typedef struct {
@@ -185,7 +185,7 @@ typedef struct {
     int UseGradient;
     MAGtype_GeoMagneticElements GradPhi; /* phi */
     MAGtype_GeoMagneticElements GradLambda; /* lambda */
-    MAGtype_GeoMagneticElements GradZ;            
+    MAGtype_GeoMagneticElements GradZ;
 } MAGtype_Gradient;
 
 typedef struct {
@@ -251,23 +251,23 @@ int MAG_Geomag(MAGtype_Ellipsoid Ellip,
         MAGtype_GeoMagneticElements *GeoMagneticElements);
 
 void MAG_Gradient(MAGtype_Ellipsoid Ellip,
-        MAGtype_CoordGeodetic CoordGeodetic, 
-        MAGtype_MagneticModel *TimedMagneticModel,  
+        MAGtype_CoordGeodetic CoordGeodetic,
+        MAGtype_MagneticModel *TimedMagneticModel,
         MAGtype_Gradient *Gradient);
 
 int MAG_Grid(MAGtype_CoordGeodetic minimum,
-        MAGtype_CoordGeodetic maximum, 
-        double cord_step_size, 
-        double altitude_step_size, 
-        double time_step, 
-        MAGtype_MagneticModel *MagneticModel, 
-        MAGtype_Geoid *Geoid, 
-        MAGtype_Ellipsoid Ellip, 
-        MAGtype_Date StartDate, 
-        MAGtype_Date EndDate, 
-        int ElementOption, 
-        int UncertaintyOption, 
-        int PrintOption, 
+        MAGtype_CoordGeodetic maximum,
+        double cord_step_size,
+        double altitude_step_size,
+        double time_step,
+        MAGtype_MagneticModel *MagneticModel,
+        MAGtype_Geoid *Geoid,
+        MAGtype_Ellipsoid Ellip,
+        MAGtype_Date StartDate,
+        MAGtype_Date EndDate,
+        int ElementOption,
+        int UncertaintyOption,
+        int PrintOption,
         char *OutputFile);
 
 
@@ -405,7 +405,7 @@ void MAG_SphericalToGeodetic(MAGtype_Ellipsoid Ellip, MAGtype_CoordSpherical Coo
 void MAG_TMfwd4(double Eps, double Epssq, double K0R4, double K0R4oa,
         double Acoeff[], double Lam0, double K0, double falseE,
         double falseN, int XYonly, double Lambda, double Phi,
-        double *X, double *Y, double *pscale, double *CoM);  
+        double *X, double *Y, double *pscale, double *CoM);
 
 int MAG_YearToDate(MAGtype_Date *Date);
 

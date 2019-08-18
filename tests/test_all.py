@@ -20,5 +20,5 @@ def test_wmm2015():
     assert mag.decl.item() == approx(15.27036)
 
 
-if __name__ == '__main__':
-    pytest.main(['-x', __file__])
+if __name__ == "__main__":
+    pytest.main(["-x", __file__])
