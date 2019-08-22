@@ -8,6 +8,7 @@
 
  WMM2015 World Magnetic Model...in simple, object-oriented Python.
  Tested on Linux, Mac and Windows.
+ Any modern C compiler we tried worked, including Visual Studio, GCC, PGI and Intel compilers...
 
  ![image](tests/incldecl.png)
 

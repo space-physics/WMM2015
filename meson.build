@@ -3,7 +3,7 @@ project('wmm15', 'c',
 
 os = host_machine.system()
 cc = meson.get_compiler('c')
-if not ['msvc', 'pgi']. contains(cc.get_id())
+if not ['msvc', 'intel-cl']. contains(cc.get_id()) and not (os == 'windows' and cc.get_id() == 'pgi')
   math_lib = cc.find_library('m')
 else
   math_lib = []
