@@ -1,8 +1,9 @@
 project('wmm15', 'c',
   default_options : ['default_library=static', 'buildtype=release', 'warning_level=0'])
 
+os = host_machine.system()
 cc = meson.get_compiler('c')
-if cc.get_id() != 'msvc'
+if not ['msvc', 'pgi']. contains(cc.get_id())
   math_lib = cc.find_library('m')
 else
   math_lib = []
