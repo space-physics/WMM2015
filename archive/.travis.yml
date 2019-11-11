@@ -1,6 +1,5 @@
 language: python
 group: travis_latest
-dist: xenial
 
 git:
   depth: 25
@@ -17,6 +16,6 @@ before_install:
 install: pip install -e .[tests,lint]
 
 script:
-- pytest -r a -v
+- pytest
 - flake8
 - mypy .

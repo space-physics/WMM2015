@@ -9,7 +9,6 @@ add_library(geo src/GeomagnetismLibrary.c)
 set_target_properties(geo PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
 if((NOT MSVC) AND NOT (WIN32 AND (CMAKE_C_COMPILER_ID STREQUAL Intel OR CMAKE_C_COMPILER_ID STREQUAL PGI)))
   target_link_libraries(geo m)
-  message(STATUS "Linking Math library")
 endif()
 
 add_library(wmm15 SHARED src/wmm_point_sub.c)

@@ -1,0 +1,52 @@
+name: ci_python
+
+on: [push, pull_request]
+
+jobs:
+
+  linux:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-python@v1
+      with:
+        python-version: '3.x'
+    - name: Install prereq
+      run: |
+        sudo apt -yq update
+        sudo apt -yq install ninja-build gcc
+    - run: pip install .[tests,lint]
+    - run: flake8
+    - run: mypy .
+    - run: python -m pytest
+      working-directory: tests
+      env:
+        CC: gcc
+
+  macos:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-python@v1
+      with:
+        python-version: '3.x'
+    - run: brew install gcc ninja
+    - run: pip install .[tests]
+    - run: python -m pytest
+      working-directory: tests
+      env:
+        CC: gcc-9
+
+  windows:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-python@v1
+      with:
+        python-version: '3.x'
+    - run: cinst -y ninja
+    - run: pip install .[tests]
+    - run: python -m pytest
+      working-directory: tests
+      env:
+        CC: gcc

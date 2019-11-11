@@ -1,5 +1,5 @@
 """
-A generic, clean way to build C/C++/Fortran code from setup.py or manually
+A generic, clean way to build C/C++/Fortran code "build on run"
 
 Michael Hirsch, Ph.D.
 https://www.scivision.dev
@@ -8,8 +8,11 @@ import shutil
 from pathlib import Path
 import subprocess
 import os
+import typing
 import sys
 import pkg_resources
+import argparse
+import logging
 
 R = Path(__file__).resolve().parents[1]
 SRCDIR = R
@@ -57,16 +60,18 @@ def meson_setup(src_dir: Path, bin_dir: Path):
     """
     attempt to build with Meson + Ninja
     """
+    args: typing.List[str] = []
     meson_exe = shutil.which("meson")
 
     if not meson_exe:
         raise FileNotFoundError("Meson not available")
 
-    cfgfn = bin_dir / "build.ninja"
-    if cfgfn.is_file():
-        cfgfn.unlink()
+    if (bin_dir / "build.ninja").is_file():
+        args += ["--wipe"]
 
-    subprocess.run([meson_exe, "setup", str(bin_dir), str(src_dir)])
+    cmd = [meson_exe, "setup", str(bin_dir), str(src_dir)] + args
+    logging.debug(cmd)
+    subprocess.run(cmd)
 
     subprocess.run([meson_exe, "test", "-C", str(bin_dir)])
 
@@ -86,5 +91,23 @@ def check_cmake_version(min_version: str) -> bool:
     return pcmake >= pmin
 
 
+def get_libpath(bin_dir: Path, stem: str) -> Path:
+    if sys.platform in ("win32", "cygwin"):
+        dllfn = bin_dir / ("lib" + stem + ".dll")
+    elif sys.platform == "linux":
+        dllfn = bin_dir / ("lib" + stem + ".so")
+    elif sys.platform == "darwin":
+        dllfn = bin_dir / ("lib" + stem + ".dylib")
+
+    if not dllfn.is_file():
+        dllfn = None
+
+    return dllfn
+
+
 if __name__ == "__main__":
-    build(sys.argv[1])
+    p = argparse.ArgumentParser()
+    p.add_argument("buildsys", choices=["meson", "cmake"])
+    P = p.parse_args()
+
+    build(P.buildsys)
