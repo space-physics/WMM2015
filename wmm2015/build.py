@@ -14,7 +14,7 @@ import pkg_resources
 import argparse
 import logging
 
-R = Path(__file__).resolve().parents[1]
+R = Path(__file__).resolve().parent
 SRCDIR = R
 BINDIR = SRCDIR / "build"
 
