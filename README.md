@@ -1,4 +1,4 @@
-[![Actions Status](https://github.com/space-physics/wmm2015/workflows/ci/badge.svg)](https://github.com/space-physics/wmm2015/actions)
+[![Actions Status](https://github.com/space-physics/wmm2015/workflows/ci_python/badge.svg)](https://github.com/space-physics/wmm2015/actions)
 
 
 [![Python versions (PyPI)](https://img.shields.io/pypi/pyversions/wmm2015.svg)](https://pypi.python.org/pypi/wmm2015)
