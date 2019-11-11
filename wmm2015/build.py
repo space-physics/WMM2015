@@ -45,11 +45,7 @@ def cmake_setup(src_dir: Path, bin_dir: Path):
     if cfgfn.is_file():
         cfgfn.unlink()
 
-    wopts = (
-        ["-G", "MinGW Makefiles", '-DCMAKE_SH="CMAKE_SH-NOTFOUND']
-        if os.name == "nt"
-        else []
-    )
+    wopts = ["-G", "MinGW Makefiles", '-DCMAKE_SH="CMAKE_SH-NOTFOUND'] if os.name == "nt" else []
 
     subprocess.run([cmake_exe, "-S", str(src_dir), "-B", str(bin_dir)] + wopts)
 
@@ -81,9 +77,7 @@ def check_cmake_version(min_version: str) -> bool:
     if not cmake:
         return False
 
-    cmake_version = subprocess.check_output(
-        [cmake, "--version"], universal_newlines=True
-    ).split()[2]
+    cmake_version = subprocess.check_output([cmake, "--version"], universal_newlines=True).split()[2]
 
     pmin = pkg_resources.parse_version(min_version)
     pcmake = pkg_resources.parse_version(cmake_version)

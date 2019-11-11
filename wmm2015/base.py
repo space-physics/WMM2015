@@ -28,9 +28,7 @@ else:
         raise ModuleNotFoundError(f"could not find {dllfn}")
 
 
-def wmm(
-    glats: np.ndarray, glons: np.ndarray, alt_km: float, yeardec: float
-) -> xarray.Dataset:
+def wmm(glats: np.ndarray, glons: np.ndarray, alt_km: float, yeardec: float) -> xarray.Dataset:
 
     glats = np.atleast_2d(glats).astype(float)  # to coerce all else to float64
     glons = np.atleast_2d(glons)
