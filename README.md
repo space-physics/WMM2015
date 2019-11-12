@@ -7,35 +7,44 @@
 
 # WMM2015
 
- WMM2015 World Magnetic Model...in simple, object-oriented Python.
- Tested on Linux, Mac and Windows.
- Any modern C compiler we tried worked, including GCC, PGI and Intel compilers.
- However, at this time Visual Studio is not supported since MSVC doesn't export function symbols without additional headers (or something like SWIG).
+WMM2015 World Magnetic Model...in simple, object-oriented Python.
+Tested on Linux, Mac and Windows.
+Most C compilers work, including GCC, PGI and Intel compilers.
+At this time Visual Studio is not supported since MSVC doesn't export function symbols without additional headers,
+which is typically done with something like SWIG.
 
- ![image](tests/incldecl.png)
+![image](tests/incldecl.png)
 
 ## Install
 
-To get the cutting-edge development version, `git clone` and then:
-
-```sh
-python -m pip install -e .
-```
-
-Otherwise, for the latest release from PyPi:
+for the latest release from PyPi:
 
 ```sh
 python -m pip install wmm2015
 ```
 
+Optionally, to get the cutting-edge development version:
+
+```sh
+git clone https://github.com/space-physics/wmm2015
+
+python -m pip install -e wmm2015
+```
+
+This Python wrapper of WMM2015 uses our build-on-run technique.
+The first time you use WMM2015, you will see messages from the Meson build system and your C compiler.
+
+
 ## Usage
+
 an example script
 
 ```sh
 python RunWMM2015.py
 ```
 
-as a Python module:
+or as a Python module:
+
 ```python
 import wmm2015
 

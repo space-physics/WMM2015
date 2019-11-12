@@ -1,15 +1,12 @@
 #!/usr/bin/env python
-import datetime
 import pytest
 from pytest import approx
-from sciencedates import datetime2yeardec
+
 import wmm2015 as wmm
 
 
 def test_wmm2015():
-    dt = datetime.datetime(2012, 7, 12, 12)
-
-    mag = wmm.wmm(65, 85, 0, datetime2yeardec(dt))
+    mag = wmm.wmm(65, 85, alt_km=0, yeardec=2012.52868852459)
 
     assert mag.north.item() == approx(9215.692665)
     assert mag.east.item() == approx(2516.0058789)
@@ -21,4 +18,4 @@ def test_wmm2015():
 
 
 if __name__ == "__main__":
-    pytest.main(["-x", __file__])
+    pytest.main([__file__])

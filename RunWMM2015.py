@@ -1,19 +1,21 @@
 #!/usr/bin/env python
 import numpy as np
+from matplotlib.pyplot import show
+import argparse
+
 import wmm2015 as wmm
 import wmm2015.plots as plt
-from matplotlib.pyplot import show
 
 
-def main():
-    lon, lat = np.meshgrid(np.arange(-180, 180 + 10, 10), np.arange(-90, 90 + 10, 10))
+p = argparse.ArgumentParser()
+p.add_argument("yeardec", help="decimal year e.g. 2015.62", type=float)
+p.add_argument("alt_km", help="altitude (km) default: 0.", type=float, default=0.0)
+P = p.parse_args()
 
-    mag = wmm.wmm(lat, lon, 0, 2015)
+lon, lat = np.meshgrid(np.arange(-180, 180 + 10, 10), np.arange(-90, 90 + 10, 10))
 
-    plt.plotwmm(mag)
+mag = wmm.wmm(lat, lon, P.alt_km, P.yeardec)
 
-    show()
+plt.plotwmm(mag)
 
-
-if __name__ == "__main__":
-    main()
+show()
