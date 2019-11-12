@@ -17,10 +17,6 @@ jobs:
     - uses: actions/setup-python@v1
       with:
         python-version: '3.x'
-    - name: Install prereq
-      run: |
-        sudo apt -yq update
-        sudo apt -yq install ninja-build gcc
     - run: pip install .[tests,lint]
     - run: flake8
     - run: mypy .
@@ -36,7 +32,7 @@ jobs:
     - uses: actions/setup-python@v1
       with:
         python-version: '3.x'
-    - run: brew install gcc ninja
+    - run: brew install gcc
     - run: pip install .[tests]
     - run: python -m pytest
       working-directory: tests
@@ -50,7 +46,6 @@ jobs:
     - uses: actions/setup-python@v1
       with:
         python-version: '3.x'
-    - run: cinst -y ninja
     - run: pip install .[tests]
     - run: python -m pytest
       working-directory: tests
