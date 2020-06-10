@@ -1,6 +1,7 @@
 # WMM2015
 
 ![Actions Status](https://github.com/space-physics/wmm2015/workflows/ci/badge.svg)
+[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/space-physics/WMM2015.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/space-physics/WMM2015/context:python)
 [![Python versions (PyPI)](https://img.shields.io/pypi/pyversions/wmm2015.svg)](https://pypi.python.org/pypi/wmm2015)
 [![Downloads](http://pepy.tech/badge/wmm2015)](http://pepy.tech/project/wmm2015)
 
