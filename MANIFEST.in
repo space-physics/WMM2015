@@ -1,3 +1,3 @@
-include wmm2015/meson.build wmm2015/CMakeLists.txt wmm2015/WMM.COF
-recursive-include wmm2015/src *.c
-recursive-include wmm2015/src *.h
+include src/wmm2015/meson.build src/wmm2015/CMakeLists.txt src/wmm2015/WMM.COF
+recursive-include src/wmm2015/src *.c
+recursive-include src/wmm2015/src *.h
