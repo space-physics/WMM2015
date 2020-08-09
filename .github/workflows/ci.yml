@@ -4,6 +4,8 @@ on:
   push:
     paths:
     - "**.py"
+    - "**.cmake"
+    - "**/CMakeLists.txt"
     - .github/workflows/ci.yml
 
 jobs:
@@ -33,12 +35,9 @@ jobs:
       with:
         python-version: '3.x'
 
-    - run: brew install gcc
     - run: pip install .[tests]
 
     - run: pytest
-      env:
-        CC: gcc-9
 
   windows:
     runs-on: windows-latest

@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-import pytest
 from pytest import approx
 
 import wmm2015 as wmm
@@ -15,7 +13,3 @@ def test_wmm2015():
 
     assert mag.incl.item() == approx(80.910090)
     assert mag.decl.item() == approx(15.27036)
-
-
-if __name__ == "__main__":
-    pytest.main([__file__])
