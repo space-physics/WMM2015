@@ -8,8 +8,7 @@ enable_testing()
 add_library(geo src/GeomagnetismLibrary.c)
 set_target_properties(geo PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
 if((NOT MSVC) AND
-    NOT (WIN32 AND (CMAKE_C_COMPILER_ID STREQUAL Intel OR
-                    CMAKE_C_COMPILER_ID STREQUAL PGI)))
+    NOT (WIN32 AND CMAKE_C_COMPILER_ID STREQUAL Intel))
   target_link_libraries(geo m)
 endif()
 
