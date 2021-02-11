@@ -1,14 +1,21 @@
-cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 3.10)
 if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE Release CACHE STRING "Debug or Release" FORCE)
 endif()
-project(wmm15 LANGUAGES C)
-enable_testing()
+project(wmm20 LANGUAGES C)
+
+include(CTest)
+
+include(CheckSymbolExists)
+check_symbol_exists(sqrt math.h NONEED_M)
+if(NOT NONEED_M)
+  set(CMAKE_REQUIRED_LIBRARIES m)
+  check_symbol_exists(sqrt math.h NEED_M)
+endif()
 
 add_library(geo src/GeomagnetismLibrary.c)
 set_target_properties(geo PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
-if((NOT MSVC) AND
-    NOT (WIN32 AND CMAKE_C_COMPILER_ID STREQUAL Intel))
+if(NEED_M)
   target_link_libraries(geo m)
 endif()
 
