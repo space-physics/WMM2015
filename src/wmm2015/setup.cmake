@@ -8,12 +8,6 @@ set(_opts)
 # --- boilerplate follows
 set(CTEST_TEST_TIMEOUT 10)
 
-message(STATUS "CMake ${CMAKE_VERSION}")
-if(CMAKE_VERSION VERSION_LESS 3.10)
-  message(FATAL_ERROR "Please update CMake >= 3.10.
-    Try 'pip install -U cmake' or https://cmake.org/download/")
-endif()
-
 # CTEST_CMAKE_GENERATOR must always be defined
 if(NOT DEFINED CTEST_CMAKE_GENERATOR AND CMAKE_VERSION VERSION_GREATER_EQUAL 3.17)
   find_program(_gen NAMES ninja ninja-build samu)
