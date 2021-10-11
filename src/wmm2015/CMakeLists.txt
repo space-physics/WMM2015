@@ -1,7 +1,5 @@
 cmake_minimum_required(VERSION 3.14...3.21)
-if(NOT CMAKE_BUILD_TYPE)
-  set(CMAKE_BUILD_TYPE Release CACHE STRING "Debug or Release" FORCE)
-endif()
+
 project(wmm20 LANGUAGES C)
 
 include(CTest)
@@ -23,14 +21,14 @@ add_library(wmm15 SHARED src/wmm_point_sub.c)
 target_link_libraries(wmm15 PRIVATE geo)
 
 # https://www.ngdc.noaa.gov/geomag/WMM/data/WMM2020/WMM2020testvalues.pdf
-add_executable(wmm20_file src/wmm_file.c)
-target_link_libraries(wmm20_file geo)
+add_executable(wmm_file src/wmm_file.c)
+target_link_libraries(wmm_file geo)
 
-if(APPLE)
+add_test(NAME WMMfile
+COMMAND $<TARGET_FILE:wmm_file> f ${CMAKE_CURRENT_SOURCE_DIR}/test_input.asc  ${CMAKE_CURRENT_BINARY_DIR}/test_output.asc
+WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+)
+set_tests_properties(WMMfile PROPERTIES
+DISABLED $<BOOL:${APPLE}>
+)
 # wmm_file.c has bug from original authors on MacOS
-  add_test(NAME MacOS-noop COMMAND "ls")
-else()
-  add_test(NAME WMM20file
-  COMMAND $<TARGET_FILE:wmm20_file> f ${CMAKE_CURRENT_SOURCE_DIR}/test_input.asc  ${CMAKE_CURRENT_BINARY_DIR}/test_output.asc
-  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
-endif()
